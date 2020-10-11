@@ -1,0 +1,12 @@
+<launch>
+	<node name="data_angle" pkg="asif"
+		type="data_angle.py" />
+	<node name="data_imu" pkg="asif"
+		type="data_imu.py" />
+	<node name="data_mag" pkg="asif"
+		type="data_mag.py" />
+	<node name="data_pry" pkg="asif"
+		type="data_pry.py" />
+
+
+</launch>
