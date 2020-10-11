@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 import rospy
-
 from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Int32
 from numpy import interp
@@ -16,15 +15,11 @@ def callback(msg):
 	for i in range(0,len(x)):
 		if x[i]==0.0:
 			x[i]=msg.range_max
-#	print(x)
 	theta=2*degrees(math.asin(25/l))
-#	print(theta)
 	n=int(interp(theta,[0,359],[0,718]))
-#	print(n)
 	if n%2==0:
 		n=n+1
 	m=int(n/2)
-#	print(m)
 	p=[]
 	for t in range(0,719):
 		count=0
@@ -38,7 +33,6 @@ def callback(msg):
 		if count==n:
 			p.append(t)
 	z.append(p)
-#	print(z)
 	angle=0
 	angle=int(interp(angle,[0,359],[0,718]))
 	if l==1000:
@@ -46,7 +40,6 @@ def callback(msg):
 		for f in range(0,len(z)):
 			if [] in z:
 				z.remove([])
-#		print("z:",z)
 		c=0
 		for d in range(0,len(z)):
 			if d==len(z)-1:
@@ -56,16 +49,12 @@ def callback(msg):
 				x2=z[d][e]-angle
 				if x2>359:
 					x2=x2-718
-#				print(x2)
 				l3.append(x2)
-#			print(l3)
 			y2=min(l3,key=abs)
 			y2=y2+angle
 			if y2<0:
 				y2=y2+718
-#			print(y2)
 			new_angle=y2
-#			new_angle=min(z[d], key=lambda x:abs(x-angle))
 			if new_angle!=angle:
 				angle=new_angle
 				break
